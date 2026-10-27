@@ -25,19 +25,19 @@ jobs:
 
       - name: Get UUID
         id: get_uuid
-        run: script/Get-UUID.ps1 -Version ${{ inputs.version }}
+        run: script\Get-UUID.ps1 -Version ${{ inputs.version }}
 
       - name: Download
-        run: script/Download.ps1 -Version ${{ inputs.version }} -UUID ${{ steps.get_uuid.outputs.uuid }}
+        run: script\Download.ps1 -Version ${{ inputs.version }} -UUID ${{ steps.get_uuid.outputs.uuid }}
 
       - name: Prepare
-        run: script/Prepare.ps1
+        run: script\Prepare.ps1
 
       - name: Test
-        run: script/Test.ps1
+        run: script\Test.ps1
 
       - name: Run
-        run: script/Run.ps1
+        run: script\Run.ps1
 
       - name: upload
         uses: actions/upload-artifact@v7
