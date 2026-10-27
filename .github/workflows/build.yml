@@ -27,11 +27,6 @@ jobs:
         id: get_uuid
         run: script/Get-UUID.ps1 -Version ${{ inputs.version }}
 
-      - name: Check
-        run: |
-          ${{ inputs.version }} .GetType().Name
-          ${{ steps.get_uuid.outputs.uuid }} .GetType().Name
-
       - name: Download
         run: script/Download.ps1 -Version ${{ inputs.version }} -UUID ${{ steps.get_uuid.outputs.uuid }}
 
