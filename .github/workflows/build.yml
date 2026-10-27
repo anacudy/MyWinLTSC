@@ -14,7 +14,7 @@ jobs:
     runs-on: windows-2025
 
     steps:
-      - name: Checkout Mine
+      - name: Checkout Repo
         uses: actions/checkout@v7
 
       - name: Checkout W10UI
@@ -27,7 +27,8 @@ jobs:
         id: get_uuid
         run: script/Get-UUID.ps1 -Version ${{ inputs.version }}
 
+      - name: Download
+        run: script/Download.ps1 -Version ${{ inputs.version }} -UUID ${{ steps.get_uuid.outputs.uuid }}
+
       - name: Test
-        run: |
-          Write-Host ${{ steps.get_uuid.outputs.uuid }}
-          Get-ChildItem
+        run: Get-ChildItem && Get-Content url.txt
