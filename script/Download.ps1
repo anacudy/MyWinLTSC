@@ -12,7 +12,7 @@ $argument = @(
 )
 aria2c $argument
 
-Get-Content $Version.txt | Add-Content url.txt
+Get-Content "$Version.txt" | Add-Content url.txt
 
 $argument = @(
   "--quiet=true",
