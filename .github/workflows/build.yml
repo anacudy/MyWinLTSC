@@ -25,26 +25,9 @@ jobs:
 
       - name: Get UUID
         id: get_uuid
-        run: |
-          if (${{ inputs.version }} -eq "2021") {
-            $keyword = "21H2 19044 amd64"
-          }
-          elseif (${{ inputs.version }} -eq "2024") {
-            $keyword = "24H2 26100 amd64"
-          }
-          else {
-            throw "invalid version: ${{ inputs.version }}"
-          }
-
-          $url = "https://api.uupdump.net/listid.php?search=$keyword&sortByDate=1"
-          $builds = (Invoke-RestMethod $url).response.builds.PSObject.Properties.Value
-          $latest = $builds | Where-Object title -notmatch 'Cumulative' | Select-Object -First 1
-          Write-Host -ForegroundColor Green $latest.title
-          Write-Host -ForegroundColor Green $latest.uuid
-
-          Add-Content -Path $env:GITHUB_OUTPUT -Value "uuid=$latest.uuid" -Encoding ascii
+        run: script/Get-UUID.ps1 -Version ${{ inputs.version }}
 
       - name: Test
         run: |
-          Write-Host -ForegroundColor Red ${{ steps.get_uuid.outputs.uuid }}
+          Write-Host ${{ steps.get_uuid.outputs.uuid }}
           Get-ChildItem
