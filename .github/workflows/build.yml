@@ -31,7 +31,7 @@ jobs:
         run: script/Download.ps1 -Version ${{ inputs.version }} -UUID ${{ steps.get_uuid.outputs.uuid }}
 
       - name: xxx
-        run: 7z
+        run: 7z e ltsc.iso install.wim
 
       - name: Test
         run: |
