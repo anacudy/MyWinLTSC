@@ -4,19 +4,25 @@ param(
   [string]$UUID
 )
 
-$argument = @(
+$arguments = @(
   "--quiet=true",
   "--conf-path=aria2.conf",
-  "--out=url.txt",
+  "--out=uup.txt",
   "https://uupdump.net/get.php?id=$UUID&pack=0&edition=updateOnly&aria2=2"
 )
-aria2c $argument
+aria2c $arguments
 
-Get-Content "$Version.txt" | Add-Content url.txt
-
-$argument = @(
+$arguments = @(
   "--quiet=true",
   "--conf-path=aria2.conf",
-  "--input-file=url.txt"
+  "--input-file=uup.txt"
+  "--dir=uup"
 )
-aria2c $argument
+aria2c $arguments
+
+$arguments = @(
+  "--quiet=true",
+  "--conf-path=aria2.conf",
+  "--input-file=$Version.txt"
+)
+aria2c $arguments
