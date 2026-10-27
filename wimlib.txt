@@ -1,0 +1,3 @@
+https://wimlib.net/downloads/wimlib-1.14.5-windows-x86_64-bin.zip
+  out=wimlib.zip
+  checksum=sha-1=796543d8fb1d20888d1bf3925ca439f8038a184c

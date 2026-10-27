@@ -26,3 +26,10 @@ $arguments = @(
   "--input-file=$Version.txt"
 )
 aria2c $arguments
+
+$arguments = @(
+  "--quiet=true",
+  "--conf-path=aria2.conf",
+  "--input-file=wimlib.txt"
+)
+aria2c $arguments
