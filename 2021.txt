@@ -1,0 +1,3 @@
+https://archive.org/download/zh-cn_windows_10_enterprise_ltsc_2021_x64_dvd_033b7312/zh-cn_windows_10_enterprise_ltsc_2021_x64_dvd_033b7312.iso
+  out=../ltsc.iso
+  checksum=sha-256=c117c5ddbc51f315c739f9321d4907fa50090ba7b48e7e9a2d173d49ef2f73a3
