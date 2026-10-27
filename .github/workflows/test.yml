@@ -1,0 +1,12 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2025
+
+    steps:
+      - name: Choco
+        run: |
+          choco install wimlib -y --no-progress
+          Get-ChildItem C:\ProgramData\chocolatey\lib\wimlib\tools\wimlib\
