@@ -6,7 +6,13 @@ jobs:
     runs-on: windows-2025
 
     steps:
-      - name: Choco
+      - name: Checkout W10UI
+        uses: actions/checkout@v7
+        with:
+          repository: abbodi1406/BatUtil
+
+      - name: Run
         run: |
-          choco install wimlib -y --no-progress
-          Get-ChildItem C:\ProgramData\chocolatey\lib\wimlib\tools\wimlib\
+          cd W10UI
+          ls
+          ./W10UI.bat
