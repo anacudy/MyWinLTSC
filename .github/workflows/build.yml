@@ -31,10 +31,11 @@ jobs:
         run: script/Download.ps1 -Version ${{ inputs.version }} -UUID ${{ steps.get_uuid.outputs.uuid }}
 
       - name: xxx
-        run: 7z e ltsc.iso install.wim
+        run: 7z e ltsc.iso install.wim -r
 
       - name: Test
         run: |
           ls
           cd uup
           ls
+          Get-PSDrive D
