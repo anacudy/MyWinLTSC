@@ -32,6 +32,9 @@ jobs:
       - name: Download
         run: script\Download.ps1
 
+      - name: Package
+        run: script\Package.ps1
+
       - name: Build
         run: script\Build.ps1
 

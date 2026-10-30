@@ -11,7 +11,13 @@ Set-WindowsEdition -Edition "IoTEnterpriseS" -Path "install"
 
 Set-WindowsProductKey -ProductKey "$productKey" -Path "install"
 
+(Get-ChildItem -Path "package\dep" -File).ForEach({
+    Add-AppxProvisionedPackage -SkipLicense -PackagePath $PSItem.FullName -Path "install"
+  })
 
+(Get-ChildItem -Path "package\app" -File).ForEach({
+    Add-AppxProvisionedPackage -SkipLicense -PackagePath $PSItem.FullName -Path "install"
+  })
 
 @(
   "Microsoft-Hyper-V-All",

@@ -75,7 +75,7 @@ function Get-DownloadUrl($Package) {
 }
 
 $ids = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
-Get-Content $Path | ForEach-Object { $_.Trim() } | Where-Object { $_ } | ForEach-Object { [void]$ids.Add($_) }
+Get-Content $Path | ForEach-Object { $_.Trim() } | Where-Object { $_ -and -not $_.StartsWith('#') } | ForEach-Object { [void]$ids.Add($_) }
 
 $cookieResp = Invoke-Soap 'GetCookie' $wuUrl (Get-Template 'GetCookie')
 $cookie = $cookieResp.Envelope.Body.GetCookieResponse.GetCookieResult.EncryptedData
