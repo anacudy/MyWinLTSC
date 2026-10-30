@@ -10,4 +10,12 @@ jobs:
         uses: actions/checkout@v7
 
       - name: test
-        run: dism
+        run: |
+          aria2c "https://go.microsoft.com/fwlink/?linkid=2289980"
+          $argumentList = @(
+            "/quiet",
+            "/features",
+            "OptionId.DeploymentTools"
+          )
+          Start-Process -Wait -FilePath adksetup -ArgumentList $argumentList
+          dism
