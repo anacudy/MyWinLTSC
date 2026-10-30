@@ -7,4 +7,6 @@ jobs:
 
     steps:
       - name: test
-        run: aria2c xxx
+        run: |
+          script\Test.ps1
+          ls uup
