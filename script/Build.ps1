@@ -26,8 +26,6 @@ $lines | Set-Content -Path $cmd
 
 Write-Output "::group::Files"
 Get-ChildItem -Path "."
-Get-ChildItem -Path "sources"
-Get-ChildItem -Path "sources\sxs"
 Get-ChildItem -Path "uup"
 Get-ChildItem -Path "bin"
 Write-Output "::endgroup::"

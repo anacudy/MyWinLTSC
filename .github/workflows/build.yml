@@ -33,7 +33,7 @@ jobs:
         run: script\Download.ps1
 
       - name: Package
-        run: script\Package.ps1
+        run: script\Package.ps1 -Path package.txt
 
       - name: Build
         run: script\Build.ps1
