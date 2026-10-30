@@ -6,5 +6,8 @@ jobs:
     runs-on: windows-2025
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
       - name: test
-        run: .\script\Get-StorePackage.ps1 -ProductId 9wzdncrfjbmp
+        run: script\Get-StorePackage.ps1 -ProductId 9wzdncrfjbmp
