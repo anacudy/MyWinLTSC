@@ -15,8 +15,6 @@ $arguments = @(
 )
 aria2c $arguments
 
-<#
-
 $keyword = @{
   "2021" = "21H2 19044 amd64"
   "2024" = "24H2 26100 amd64"
@@ -56,5 +54,3 @@ if ($ENV:LTSC_VERSION -eq "2021") {
   $latest = $updates | Sort-Object -Descending LastUpdated | Select-Object -First 1
   Save-MSCatalogUpdate -Update $latest -Destination uup
 }
-
-#>

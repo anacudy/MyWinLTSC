@@ -3,15 +3,28 @@ $productKey = @{
   "2024" = "KBN8V-HFGQ4-MGXVD-347P6-PDQGT"
 }[$ENV:LTSC_VERSION]
 
-New-Item -ItemType Directory -Path "install"
+New-Item -ItemType "Directory" -Path "install"
 
-DISM /Mount-Image /Optimize /CheckIntegrity /ImageFile:"install.wim" /MountDir:"install"
+Mount-WindowsImage -Optimize -CheckIntegrity -Path "install" -ImagePath "install.wim"
 
-DISM /Set-Edition:"IoTEnterpriseS" /Image:"install"
+Set-WindowsEdition -Edition "IoTEnterpriseS" -Path "install"
 
-DISM /Set-ProductKey:"$productKey" /Image:"install"
+Set-WindowsProductKey -ProductKey "$productKey" -Path "install"
 
-DISM /Unmount-Image /Commit /CheckIntegrity /MountDir:"install"
+
+
+@(
+  "Microsoft-Hyper-V-All",
+  "VirtualMachinePlatform",
+  "Containers-DisposableClientVM",
+  "HypervisorPlatform"
+).ForEach({
+    Enable-WindowsOptionalFeature -All -FeatureName $PSItem -Path "install"
+  })
+
+Repair-WindowsImage -StartComponentCleanup -ResetBase -Path "install"
+
+Dismount-WindowsImage -Save -CheckIntegrity -Path "install"
 
 bin\wimlib-imagex export --solid "install.wim" all "install.esd"
 
