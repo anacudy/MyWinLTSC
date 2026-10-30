@@ -7,15 +7,4 @@ jobs:
 
     steps:
       - name: test
-        run: |
-          $ErrorActionPreference = 'Stop'
-          try {
-              $r = Invoke-WebRequest 'https://store.rg-adguard.net/api/GetFiles' -Method Post `
-                  -Body @{ type = 'ProductId'; url = '9wzdncrfjbmp'; ring = 'RP'; lang = 'en-US' } `
-                  -SkipHttpErrorCheck
-              Write-Host "HTTP $($r.StatusCode), $($r.Content.Length) bytes"
-              if ($r.Content -match 'Just a moment|cf_chl') { Write-Host 'BLOCKED: Cloudflare challenge'; exit 1 }
-              $n = ([regex]::Matches($r.Content, '<a href=')).Count
-              if ($n -gt 0) { Write-Host "OK: $n links"; exit 0 }
-              Write-Host 'UNKNOWN response:'; Write-Host $r.Content.Substring(0, [Math]::Min(500, $r.Content.Length)); exit 1
-          } catch { Write-Host "ERROR: $_"; exit 1 }
+        run: script\Get-StorePackage.ps1 -ProductId 9wzdncrfjbmp
