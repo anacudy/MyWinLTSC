@@ -1,14 +1,24 @@
 param(
   [ValidateSet("2021", "2024")]
-  [string]$Version,
-  [string]$UUID
+  [string]$Version
 )
+
+$keyword = @{
+  "2021" = "21H2 19044 amd64"
+  "2024" = "24H2 26100 amd64"
+}[$Version]
+
+$url = "https://api.uupdump.net/listid.php?search=$keyword&sortByDate=1"
+$builds = (Invoke-RestMethod $url).response.builds.PSObject.Properties.Value
+$latest = $builds | Where-Object title -notmatch 'Cumulative' | Select-Object -First 1
+$latest.title
+$latest.uuid
 
 $arguments = @(
   "--quiet=true",
   "--conf-path=aria2.conf",
   "--out=uup.txt",
-  "https://uupdump.net/get.php?id=$UUID&pack=0&edition=updateOnly&aria2=2"
+  "https://uupdump.net/get.php?id=${$latest.uuid}&pack=0&edition=updateOnly&aria2=2"
 )
 aria2c $arguments
 
@@ -33,3 +43,10 @@ $arguments = @(
   "--input-file=wimlib.txt"
 )
 aria2c $arguments
+
+Install-Module MSCatalogLTS -Scope CurrentUser -Force
+$updates = Get-MSCatalogUpdate -Search '3.5 -4.8.1 22H2 1903 Updates x64' -AllPages
+$latest = $updates | Sort-Object -Descending LastUpdated | Select-Object -First 1
+Save-MSCatalogUpdate -Update $latest -Destination uup
+
+gh release download --repo Secant1006/PSFExtractor --pattern *x64* --output PSFExtractor.zip

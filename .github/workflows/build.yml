@@ -14,33 +14,23 @@ jobs:
     runs-on: windows-2025
 
     steps:
-      - name: Checkout Repo
+      - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Checkout W10UI
+      - name: BatUtil
         uses: actions/checkout@v7
         with:
           repository: abbodi1406/BatUtil
           path: BatUtil
 
-      - name: Get UUID
-        id: get_uuid
-        run: script\Get-UUID.ps1 -Version ${{ inputs.version }}
-
       - name: Download
-        run: script\Download.ps1 -Version ${{ inputs.version }} -UUID ${{ steps.get_uuid.outputs.uuid }}
+        run: script\Download.ps1 -Version ${{ inputs.version }}
 
-      - name: Prepare
-        run: script\Prepare.ps1
+      - name: Build
+        run: script\Build.ps1
 
-      - name: Test
-        run: script\Test.ps1
-
-      - name: Run
-        run: script\Run.ps1
-
-      - name: upload
-        uses: actions/upload-artifact@v7
+      - name: Release
+        uses: softprops/action-gh-release@v3
         with:
-          path: W10UI_Debug.log
-          compression-level: 9
+          tag_name: latest
+          files: W10UI_Debug.log
