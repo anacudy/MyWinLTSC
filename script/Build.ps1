@@ -7,8 +7,6 @@ $PSNativeCommandUseErrorActionPreference = $true
 
 Remove-Item -Path "ltsc.iso"
 
-<#
-
 Copy-Item -Path "BatUtil\W10UI\W10UI.ini"
 Copy-Item -Path "BatUtil\W10UI\W10UI.cmd"
 
@@ -39,5 +37,3 @@ Get-Content -Path "W10UI.ini"
 Write-Output "::endgroup::"
 
 .\W10UI.cmd
-
-#>
