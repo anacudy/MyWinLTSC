@@ -1,7 +1,7 @@
 on:
   workflow_dispatch:
     inputs:
-      version:
+      ltsc_version:
         type: choice
         options:
           - "2021"
@@ -16,6 +16,9 @@ jobs:
     permissions:
       contents: write
 
+    env:
+      LTSC_VERSION: ${{ inputs.ltsc_version }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -27,13 +30,17 @@ jobs:
           path: BatUtil
 
       - name: Download
-        run: script\Download.ps1 -Version ${{ inputs.version }}
+        run: script\Download.ps1
 
       - name: Build
         run: script\Build.ps1
+
+      - name: Customize
+        run: script\Customize.ps1
 
       - name: Release
         uses: softprops/action-gh-release@v3
         with:
           tag_name: latest
-          files: W10UI_Debug.log
+          files: |
+            dism.7z
