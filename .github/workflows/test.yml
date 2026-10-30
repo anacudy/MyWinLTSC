@@ -7,4 +7,4 @@ jobs:
 
     steps:
       - name: test
-        run: script\Get-StorePackage.ps1 -ProductId 9wzdncrfjbmp
+        run: .\script\Get-StorePackage.ps1 -ProductId 9wzdncrfjbmp
