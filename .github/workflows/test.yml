@@ -6,13 +6,5 @@ jobs:
     runs-on: windows-2025
 
     steps:
-      - name: Checkout W10UI
-        uses: actions/checkout@v7
-        with:
-          repository: abbodi1406/BatUtil
-
-      - name: Run
-        run: |
-          cd W10UI
-          ls
-          ./W10UI.bat
+      - name: test
+        run: aria2c xxx
