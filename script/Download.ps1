@@ -4,7 +4,7 @@ $PSNativeCommandUseErrorActionPreference = $true
 $arguments = @(
   "--quiet=true",
   "--conf-path=aria2.conf",
-  "--input-file=$($Env:LTSC_VERSION).txt"
+  "--input-file=$($ENV:LTSC_VERSION).txt"
 )
 aria2c $arguments
 
@@ -20,7 +20,7 @@ aria2c $arguments
 $keyword = @{
   "2021" = "21H2 19044 amd64"
   "2024" = "24H2 26100 amd64"
-}[$Env:LTSC_VERSION]
+}[$ENV:LTSC_VERSION]
 
 $url = "https://api.uupdump.net/listid.php?search=$keyword&sortByDate=1"
 $builds = (Invoke-RestMethod $url).response.builds.PSObject.Properties.Value
@@ -50,7 +50,7 @@ $arguments = @(
 )
 aria2c $arguments
 
-if ($Env:LTSC_VERSION -eq "2021") {
+if ($ENV:LTSC_VERSION -eq "2021") {
   Install-Module MSCatalogLTS -Scope CurrentUser -Force
   $updates = Get-MSCatalogUpdate -Search '3.5 -4.8.1 22H2 1903 Updates x64' -AllPages
   $latest = $updates | Sort-Object -Descending LastUpdated | Select-Object -First 1

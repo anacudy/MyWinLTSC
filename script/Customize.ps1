@@ -18,3 +18,5 @@ bin\wimlib-imagex export --solid "install.wim" all "install.esd"
 7z a -mx=0 "install.7z" "install.esd" -v2000m
 
 7z a -mx=9 "dism.7z" "$($ENV:WINDIR)\Logs\Dism"
+
+Get-ChildItem -Path "."
