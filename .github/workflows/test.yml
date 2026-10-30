@@ -6,6 +6,9 @@ jobs:
     runs-on: windows-2025
 
     steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v7
+
       - name: test
         run: |
           script\Test.ps1
