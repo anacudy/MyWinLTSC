@@ -19,7 +19,7 @@ Write-Output '::group::UUP Dump API'
 Write-Output "Title: $($latest.title)"
 Write-Output "Build: $($latest.build)"
 Write-Output "Arch:  $($latest.arch)"
-Write-Output "Time:  $(Get-Date -UnixTimeSeconds -AsUTC -UnixTimeSeconds $latest.created)"
+Write-Output "Time:  $(Get-Date -AsUTC -UnixTimeSeconds $latest.created)"
 Write-Output "UUID:  $($latest.uuid)"
 Write-Output '::endgroup::'
 
