@@ -13,6 +13,9 @@ jobs:
   build:
     runs-on: windows-2025
 
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v7

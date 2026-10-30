@@ -3,6 +3,9 @@ param(
   [string]$Version
 )
 
+$ErrorActionPreference = "Stop"
+$PSNativeCommandUseErrorActionPreference = $true
+
 $keyword = @{
   "2021" = "21H2 19044 amd64"
   "2024" = "24H2 26100 amd64"
@@ -11,14 +14,20 @@ $keyword = @{
 $url = "https://api.uupdump.net/listid.php?search=$keyword&sortByDate=1"
 $builds = (Invoke-RestMethod $url).response.builds.PSObject.Properties.Value
 $latest = $builds | Where-Object title -notmatch 'Cumulative' | Select-Object -First 1
-$latest.title
-$latest.uuid
+
+Write-Output '::group::UUP Dump API'
+Write-Output "Title: $($latest.title)"
+Write-Output "Build: $($latest.build)"
+Write-Output "Arch:  $($latest.arch)"
+Write-Output "Time:  $(Get-Date -UnixTimeSeconds -AsUTC -UnixTimeSeconds $latest.created)"
+Write-Output "UUID:  $($latest.uuid)"
+Write-Output '::endgroup::'
 
 $arguments = @(
   "--quiet=true",
   "--conf-path=aria2.conf",
   "--out=uup.txt",
-  "https://uupdump.net/get.php?id=${$latest.uuid}&pack=0&edition=updateOnly&aria2=2"
+  "https://uupdump.net/get.php?id=$($latest.uuid)&pack=0&edition=updateOnly&aria2=2"
 )
 aria2c $arguments
 

@@ -1,3 +1,6 @@
+$ErrorActionPreference = "Stop"
+$PSNativeCommandUseErrorActionPreference = $true
+
 7z e wimlib.zip -obin *.exe *.dll
 7z e PSFExtractor.zip -obin
 7z e ltsc.iso -r -osources install.wim
