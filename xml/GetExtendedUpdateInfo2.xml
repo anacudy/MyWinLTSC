@@ -1,0 +1,10 @@
+<GetExtendedUpdateInfo2 xmlns="http://www.microsoft.com/SoftwareDistribution/Server/ClientWebService">
+  <updateIDs>
+    <UpdateIdentity><UpdateID>{{UpdateId}}</UpdateID><RevisionNumber>{{Revision}}</RevisionNumber></UpdateIdentity>
+  </updateIDs>
+  <infoTypes>
+    <XmlUpdateFragmentType>FileUrl</XmlUpdateFragmentType>
+    <XmlUpdateFragmentType>FileDecryption</XmlUpdateFragmentType>
+  </infoTypes>
+  <deviceAttributes>FlightRing=Retail;</deviceAttributes>
+</GetExtendedUpdateInfo2>
