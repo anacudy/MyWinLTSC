@@ -18,4 +18,6 @@ jobs:
             "OptionId.DeploymentTools"
           )
           Start-Process -Wait -FilePath adksetup -ArgumentList $argumentList
-          dism
+
+      - name: test
+        run: dism
