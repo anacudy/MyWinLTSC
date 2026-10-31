@@ -15,12 +15,12 @@ Set-WindowsEdition -Edition "IoTEnterpriseS" -Path "install"
 Set-WindowsProductKey -ProductKey "$productKey" -Path "install"
 
 (Get-ChildItem -Path "package\dep" -File).ForEach({
-    Write-Host "Add-AppxProvisionedPackage -SkipLicense -PackagePath $PSItem.FullName -Path install"
+    Write-Host $PSItem.FullName
     Add-AppxProvisionedPackage -SkipLicense -PackagePath $PSItem.FullName -Path "install"
   })
 
 (Get-ChildItem -Path "package\app" -File).ForEach({
-    Write-Host"Add-AppxProvisionedPackage -SkipLicense -PackagePath $PSItem.FullName -Path install"
+    Write-Host $PSItem.FullName
     Add-AppxProvisionedPackage -SkipLicense -PackagePath $PSItem.FullName -Path "install"
   })
 
@@ -41,6 +41,6 @@ bin\wimlib-imagex export --solid "install.wim" all "install.esd"
 
 7z a -mx=0 "install.7z" "install.esd" -v2000m
 
-7z a -mx=9 "W10UI_Debug.log.7z" "W10UI_Debug.log"
+# 7z a -mx=9 "W10UI_Debug.log.7z" "W10UI_Debug.log"
 
 # 7z a -mx=9 "dism.log.7z" "C:\Windows\Logs\DISM\dism.log"

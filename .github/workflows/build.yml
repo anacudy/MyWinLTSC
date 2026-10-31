@@ -43,7 +43,9 @@ jobs:
 
       - name: Log
         if: always()
-        run: 7z a -mx=9 "dism.log.7z" "C:\Windows\Logs\DISM\dism.log"
+        run: |
+          7z a -mx=9 "dism.log.7z" "C:\Windows\Logs\DISM\dism.log"
+          7z a -mx=9 "W10UI_Debug.log.7z" "W10UI_Debug.log"
 
       - name: Release
         uses: softprops/action-gh-release@v3
