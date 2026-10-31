@@ -1,3 +1,6 @@
+$ErrorActionPreference = "Stop"
+$PSNativeCommandUseErrorActionPreference = $true
+
 $productKey = @{
   "2021" = "QPM6N-7J2WJ-P88HH-P3YRH-YY74H"
   "2024" = "KBN8V-HFGQ4-MGXVD-347P6-PDQGT"
@@ -36,6 +39,6 @@ bin\wimlib-imagex export --solid "install.wim" all "install.esd"
 
 7z a -mx=0 "install.7z" "install.esd" -v2000m
 
-7z a -mx=9 "dism.7z" "$($ENV:WINDIR)\Logs\Dism"
+7z a -mx=9 "W10UI_Debug.log.7z" "W10UI_Debug.log"
 
-Get-ChildItem -Path "."
+7z a -mx=9 "dism.log.7z" "C:\Windows\Logs\DISM\dism.log"

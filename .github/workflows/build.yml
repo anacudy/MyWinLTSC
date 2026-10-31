@@ -20,10 +20,10 @@ jobs:
       LTSC_VERSION: ${{ inputs.ltsc_version }}
 
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v7
 
-      - name: BatUtil
+      - name: Checkout BatUtil
         uses: actions/checkout@v7
         with:
           repository: abbodi1406/BatUtil
@@ -33,7 +33,7 @@ jobs:
         run: script\Download.ps1
 
       - name: Package
-        run: script\Package.ps1 -Path package.txt
+        run: script\Package.ps1
 
       - name: Build
         run: script\Build.ps1
@@ -46,4 +46,6 @@ jobs:
         with:
           tag_name: latest
           files: |
-            dism.7z
+            dism.log.7z
+            W10UI_Debug.log.7z
+            install.7z.*

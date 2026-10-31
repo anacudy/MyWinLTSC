@@ -14,9 +14,12 @@ $ini = "W10UI.ini"
 $lines = Get-Content -Path $ini
 $lines[1] = "Target        =$PWD\install.wim"
 $lines[2] = "Repo          =$PWD\uup"
-$lines[7] = "Cleanup       =1"
-$lines[8] = "ResetBase     =1"
+$lines[6] = "Net35Source   =$PWD\sxs"
 $lines[15] = "UseWimlib     =1"
+$lines[19] = "_CabDir       =$PWD\temp"
+$lines[20] = "MountDir      =$PWD\mount"
+$lines[21] = "WinreMount    =$PWD\mountre"
+$lines[29] = "AutoStart     =1"
 $lines | Set-Content -Path $ini
 
 $cmd = "W10UI.cmd"
