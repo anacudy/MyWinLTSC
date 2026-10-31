@@ -3,12 +3,13 @@ $PSNativeCommandUseErrorActionPreference = $true
 
 $wuUrl = 'https://fe3.delivery.mp.microsoft.com/ClientWebService/client.asmx'
 $securedUrl = "$wuUrl/secured"
+$xmlDir = Join-Path $PWD 'xml'
 $root = Join-Path $PWD 'package'
 $ariaConf = Join-Path $PWD 'aria2.conf'
 $ariaInput = Join-Path $root 'aria2-input.txt'
 
 function Get-Template([string]$Name, [hashtable]$Values = @{}) {
-  $text = Get-Content ("xml\$Name.xml") -Raw
+  $text = Get-Content (Join-Path $xmlDir "$Name.xml") -Raw
   foreach ($key in $Values.Keys) { $text = $text.Replace("{{$key}}", [string]$Values[$key]) }
   $text
 }
@@ -45,7 +46,7 @@ function Get-Packages([string]$Id, [string]$Cookie) {
     $file = ([xml]"<root>$($u.Xml)</root>").root.Files.File |
     Where-Object InstallerSpecificIdentifier | Select-Object -First 1
     $info = $updateInfo[$u.ID]
-    if (-not $file -or -not $info -or $file.InstallerSpecificIdentifier -notmatch '_(x64|neutral)_') { continue }
+    if (-not $file -or -not $info -or $file.InstallerSpecificIdentifier -notmatch '_(x64|neutral)_' -or $file.FileName -match '\.e(appx|msix)') { continue }
     [pscustomobject]@{
       Name     = $file.InstallerSpecificIdentifier
       FileName = $file.FileName
