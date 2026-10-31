@@ -43,6 +43,7 @@ jobs:
 
       - name: Release
         uses: softprops/action-gh-release@v3
+        if: always()
         with:
           tag_name: latest
           files: |
