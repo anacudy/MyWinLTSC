@@ -37,4 +37,4 @@ Write-Output "::group::W10UI.ini"
 Get-Content -Path "W10UI.ini"
 Write-Output "::endgroup::"
 
-.\W10UI.cmd
+# .\W10UI.cmd
