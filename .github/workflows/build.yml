@@ -41,6 +41,10 @@ jobs:
       - name: Customize
         run: script\Customize.ps1
 
+      - name: Log
+        if: always()
+        run: 7z a -mx=9 "dism.log.7z" "C:\Windows\Logs\DISM\dism.log"
+
       - name: Release
         uses: softprops/action-gh-release@v3
         if: always()

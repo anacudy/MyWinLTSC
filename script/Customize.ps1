@@ -43,4 +43,4 @@ bin\wimlib-imagex export --solid "install.wim" all "install.esd"
 
 7z a -mx=9 "W10UI_Debug.log.7z" "W10UI_Debug.log"
 
-7z a -mx=9 "dism.log.7z" "C:\Windows\Logs\DISM\dism.log"
+# 7z a -mx=9 "dism.log.7z" "C:\Windows\Logs\DISM\dism.log"
