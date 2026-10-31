@@ -15,12 +15,12 @@ Set-WindowsEdition -Edition "IoTEnterpriseS" -Path "install"
 Set-WindowsProductKey -ProductKey "$productKey" -Path "install"
 
 (Get-ChildItem -Path "package\dep" -File).ForEach({
-    $PSItem.FullName
+    Write-Host "Add-AppxProvisionedPackage -SkipLicense -PackagePath $PSItem.FullName -Path install"
     Add-AppxProvisionedPackage -SkipLicense -PackagePath $PSItem.FullName -Path "install"
   })
 
 (Get-ChildItem -Path "package\app" -File).ForEach({
-    $PSItem.FullName
+    Write-Host"Add-AppxProvisionedPackage -SkipLicense -PackagePath $PSItem.FullName -Path install"
     Add-AppxProvisionedPackage -SkipLicense -PackagePath $PSItem.FullName -Path "install"
   })
 
